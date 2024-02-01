@@ -1,14 +1,15 @@
-import {Router} from "@vaadin/router";
+// Import Router correctly
+import { Router } from '@vaadin/router';
+import './components/homepage.js';
 
-const outlet = document.querySelector('#app')
-const router = new Router(outlet)
+const outlet = document.querySelector('#app');
+const router = new Router(outlet);
 
 router.setRoutes([
     {
-        path: "/",
-        component: "homepage",
-    }
+        path: '/',
+        component: 'home-page',
+    },
 ]).then(() => {
-    console.log("Routes mapped succesfully!")
-
-})
+    console.log('Routes mapped successfully!');
+});
