@@ -15,7 +15,7 @@ class HomePage extends LitElement {
             width: 100%;
         }
         
-        #main-container h1 {
+        #main-container {
             color: var(--main-dark-blue)
         }
     `
