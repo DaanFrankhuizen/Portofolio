@@ -14,11 +14,24 @@ class HomePage extends LitElement {
             height: 100%;
             width: 100%;
         }
-        
+
         #main-container {
-            color: var(--main-dark-blue)
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--main-dark-blue);
+        }
+
+        // TODO: even lang maken als de p
+        #main-container h1 {
+            margin-bottom: 0;
+        }
+
+        #main-container p {
+            margin-top: 0;
         }
     `
+
     render() {
         console.log('hoi');
         return html`
