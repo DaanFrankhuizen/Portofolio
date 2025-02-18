@@ -2,21 +2,24 @@ import AboutMe from '@/components/AboutMe';
 import NameTitle from '@/components/NameTitle';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function HomePage() {
   return (
     <>
       <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 text-white text-center font-sans">
         {/* Profielfoto */}
-        <img
+        <Image
           src="/profile.png"
           alt="Daan Frankhuizen"
+          width={1100}
+          height={1100}
           className="w-32 h-32 rounded-full border-4 border-white shadow-lg"
         />
 
         <NameTitle />
 
-=        <Link href="#about">
+        <Link href="#about">
           <p className="mt-6 px-8 py-4 bg-white text-blue-700 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300">
             Learn More About Me
           </p>
@@ -42,7 +45,7 @@ export default function HomePage() {
 
           {/* LinkedIn link */}
           <a
-            href="https://www.linkedin.com/in/daanfrankhuizen"
+            href="https://www.linkedin.com/in/daan-frankhuizen-9ab238240/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white hover:text-gray-300 transition-all duration-300"
