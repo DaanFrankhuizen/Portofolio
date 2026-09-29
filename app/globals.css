@@ -2,20 +2,309 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root,
+[data-theme="light"] {
+  --bg: #f2f1ea;
+  --surface: #fbfaf5;
+  --ink: #15160f;
+  --muted: #57584e;
+  --line: rgba(21, 22, 15, 0.14);
+  --accent: #c5f03a;
+  --on-accent: #15160f;
+  --focus: #15160f;
+  --redline: #e5484d;
+  --header-h: 68px;
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+[data-theme="dark"] {
+  --bg: #11120e;
+  --surface: #1a1b16;
+  --ink: #efeee6;
+  --muted: #a4a598;
+  --line: rgba(239, 238, 230, 0.15);
+  --focus: #c5f03a;
+  --redline: #ff6369;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background: var(--bg);
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container-page {
+    @apply mx-auto max-w-page;
+    padding-inline: clamp(20px, 5vw, 56px);
+  }
+
+  /* Archivo in its wide cut, used for all big headings */
+  .display {
+    font-family: var(--font-archivo), sans-serif;
+    font-weight: 800;
+    font-stretch: 112%;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[13px] uppercase tracking-[.04em] text-muted;
+  }
+
+  .section-heading {
+    @apply display m-0 leading-[.98] tracking-[-.04em];
+    font-size: clamp(34px, 5vw, 68px);
+  }
+
+  .section-pad {
+    padding-block: clamp(64px, 9vw, 128px);
+  }
+
+  .icon-btn {
+    @apply grid h-10 w-10 place-items-center rounded-full border border-line bg-transparent transition-[transform,border-color] duration-200 hover:-translate-y-0.5 hover:border-ink;
+  }
+}
+
+/*
+ * Hero "build": elements start as a wireframe and color in.
+ * Each element sets its own delay via --d. Only `from` keyframes are used with
+ * fill-mode backwards, so after the animation the normal styles (and hovers) apply.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .b-box {
+    animation: b-box 0.8s var(--d, 0.9s) backwards;
+  }
+  .b-muted {
+    animation: b-box 0.8s var(--d, 0.9s) backwards, b-muted 0.8s var(--d, 0.9s) backwards;
+  }
+  .b-outline {
+    animation: b-box 0.8s var(--d, 0.9s) backwards, b-outline 0.8s var(--d, 0.9s) backwards;
+  }
+  .b-fill {
+    animation: b-fill 0.8s var(--d, 0.9s) backwards;
+  }
+  .b-img {
+    animation: b-img 0.9s var(--d, 0.9s) backwards;
+  }
+  .redlines {
+    animation: redlines 2.6s linear both;
+  }
+}
+
+@keyframes b-box {
+  from {
+    outline: 1px dashed var(--muted);
+    outline-offset: 4px;
+  }
+  to {
+    outline: 1px dashed transparent;
+    outline-offset: 4px;
+  }
+}
+
+@keyframes b-muted {
+  from {
+    opacity: 0.35;
+  }
+}
+
+@keyframes b-outline {
+  from {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--muted);
+  }
+}
+
+@keyframes b-fill {
+  from {
+    background-color: transparent;
+    border-color: var(--muted);
+    color: var(--muted);
+    box-shadow: none;
+    outline: 1px dashed var(--muted);
+    outline-offset: -1px;
+  }
+}
+
+@keyframes b-img {
+  from {
+    opacity: 0;
+    filter: grayscale(1);
+  }
+}
+
+@keyframes redlines {
+  0% {
+    opacity: 0;
+  }
+  6%,
+  82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.redline-v,
+.redline-h {
+  position: absolute;
+  background: var(--redline);
+}
+
+.redline-v {
+  width: 1px;
+}
+
+.redline-h {
+  height: 1px;
+}
+
+/* End caps */
+.redline-v::before,
+.redline-v::after,
+.redline-h::before,
+.redline-h::after {
+  content: "";
+  position: absolute;
+  background: var(--redline);
+}
+
+.redline-v::before,
+.redline-v::after {
+  left: -4px;
+  width: 9px;
+  height: 1px;
+}
+
+.redline-v::before {
+  top: 0;
+}
+
+.redline-v::after {
+  bottom: 0;
+}
+
+.redline-h::before,
+.redline-h::after {
+  top: -4px;
+  width: 1px;
+  height: 9px;
+}
+
+.redline-h::before {
+  left: 0;
+}
+
+.redline-h::after {
+  right: 0;
+}
+
+.redline-tag {
+  position: absolute;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--redline);
+  color: #fff;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/*
+ * Scroll-linked build for the sections below the hero. ScrollBuild.jsx sets --p
+ * (0–1) on each [data-sb] group; every element builds between --p = --s and
+ * --s + --w. The animations are paused and scrubbed via a negative delay.
+ */
+.sb-redlines {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sb-on [data-sb] :is(.b-box, .b-muted, .b-outline, .b-fill, .b-img, .ink),
+  .sb-on [data-sb]:is(.b-box, .b-muted, .b-outline, .b-fill, .b-img) {
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-play-state: paused;
+    animation-fill-mode: backwards;
+    animation-delay: calc((var(--s, 0) - var(--p, 0)) / var(--w, 0.5) * 1s);
+  }
+
+  /* Redlines show up halfway through a section's build and fade out near the end */
+  .sb-on .sb-redlines {
+    display: block;
+    opacity: clamp(0, min((var(--p, 0) - 0.05) / 0.15, (0.85 - var(--p, 0)) / 0.15), 1);
+  }
+}
+
+/* Letters: outline is drawn left to right, then the letter fills in */
+.ink {
+  display: inline-block;
+  --w: 0.12;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ink {
+    animation: ink 0.6s var(--d, 0s) backwards;
+  }
+}
+
+@keyframes ink {
+  0% {
+    clip-path: inset(-20% 100% -20% -5%);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--muted);
+  }
+  50% {
+    clip-path: inset(-20% -5% -20% -5%);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--muted);
+  }
+  100% {
+    clip-path: inset(-20% -5% -20% -5%);
+  }
+}
+
+/* Apple-style pinning on laptops: the section sticks while it builds */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  /* Extra scroll distance while the section stays stuck */
+  .sb-on .pin-track::after {
+    content: "";
+    display: block;
+    height: var(--pin);
+  }
+  .sb-on .pin-track > [data-sb] {
+    position: sticky;
+    top: var(--header-h);
+  }
 }
