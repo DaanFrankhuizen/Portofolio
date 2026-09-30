@@ -31,12 +31,12 @@ export default function ScrollBuild() {
         const track = pinTrack(el, pinMq.matches);
         let start, end, top;
         if (track) {
-          // Sticks just below the header. Starts building on the way in, finishes
-          // when the pin releases (and, for sections taller than the screen,
-          // once their bottom is in view).
+          // Sticks just below the header. Stays a wireframe until it's stuck,
+          // finishes when the pin releases (and, for sections taller than the
+          // screen, once their bottom is in view).
           top = track.getBoundingClientRect().top;
           const pin = track.offsetHeight - el.offsetHeight;
-          start = vh * 0.4;
+          start = header;
           end = header - pin - Math.max(0, el.offsetHeight - (vh - header));
         } else {
           // Done once its top reaches 30% of the viewport.

@@ -9,7 +9,7 @@ import { GITHUB_URL, projects } from "@/data/site";
 const at = (s) => ({ "--s": s });
 
 function ProjectCard({ project, n }) {
-  const { title, year, desc, tags, live, code, image } = project;
+  const { title, year, role, desc, tags, live, code, image } = project;
   return (
     // Each card is its own build group, so cards further down build later.
     <article
@@ -43,11 +43,20 @@ function ProjectCard({ project, n }) {
       <div className="flex flex-1 flex-col gap-3.5 p-[clamp(20px,2.5vw,28px)]">
         <div className="flex items-baseline justify-between gap-3">
           <h3
-            className="display m-0 text-[clamp(24px,2.4vw,30px)] leading-[1.05] tracking-[-.03em] [font-stretch:108%]">
+            className="display m-0 text-[clamp(24px,2.4vw,30px)] leading-[1.05] tracking-[-.03em] [font-stretch:108%]"
+          >
             <InkText text={title} from={0.15} spread={0.2} />
           </h3>
           <span className="flex-none font-mono text-xs text-muted">{year}</span>
         </div>
+        {role && (
+          <span
+            className="b-fill self-start rounded-full bg-accent px-2.5 py-1 font-mono text-xs text-on-accent"
+            style={at(0.22)}
+          >
+            {role}
+          </span>
+        )}
         <p className="b-box b-muted m-0 text-base text-muted [text-wrap:pretty]" style={at(0.25)}>
           {desc}
         </p>

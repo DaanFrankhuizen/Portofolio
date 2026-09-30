@@ -21,36 +21,39 @@ export const stack = [
   "Git",
 ];
 
-// `live` and `code` are optional: the matching button is hidden when left empty.
+// `live`, `code` and `role` are optional: the matching element is hidden when left empty.
 // `image` is optional: a path in /public, e.g. "/projects/portfolio.png".
 export const projects = [
   {
+    title: "Expertisepunt",
+    year: "2026",
+    role: "Lead Software Engineer",
+    desc: "A medical administration application, built with React, NestJS and Python.",
+    tags: ["React", "NestJS", "Python", "SQL"],
+  },
+  {
+    title: "90plus1.nl",
+    year: "2026",
+    role: "Software Developer",
+    desc: "A custom-built travel app for football fans.",
+    tags: ["WordPress", "JavaScript"],
+    live: "https://90plus1.nl",
+  },
+  {
+    title: "utrechtunion.nl",
+    year: "2025",
+    role: "Software Developer",
+    desc: "The website of a student talk show.",
+    tags: ["WordPress", "JavaScript"],
+    live: "https://utrechtunion.nl",
+  },
+  {
     title: "This portfolio",
     year: "2026",
-    desc: "A hand-built personal site with light and dark themes, scroll-driven motion and an accessibility-first component set.",
-    tags: ["Next.js", "Tailwind CSS", "Framer Motion"],
+    role: "Design & development",
+    desc: "A hand-built personal site with light and dark themes, a site that builds itself as you scroll, and an accessibility-first component set.",
+    tags: ["Next.js", "Tailwind CSS"],
     live: "https://daanfrankhuizen.nl",
     code: `${GITHUB_URL}/Portofolio`,
-  },
-  {
-    title: "Project title",
-    year: "2025",
-    desc: "One or two sentences on the problem, what you built, and the result it had for the people using it.",
-    tags: ["React", "TypeScript", "REST API"],
-    code: GITHUB_URL,
-  },
-  {
-    title: "Project title",
-    year: "2025",
-    desc: "One or two sentences on the problem, what you built, and the result it had for the people using it.",
-    tags: ["JavaScript", "HTML/CSS", "Figma"],
-    code: GITHUB_URL,
-  },
-  {
-    title: "Project title",
-    year: "2024",
-    desc: "One or two sentences on the problem, what you built, and the result it had for the people using it.",
-    tags: ["Next.js", "Tailwind CSS"],
-    code: GITHUB_URL,
   },
 ];
