@@ -2,7 +2,7 @@ import Icon from "@/components/Icon";
 import InkText from "@/components/InkText";
 import SectionLabel from "@/components/SectionLabel";
 import SectionRedlines from "@/components/SectionRedlines";
-import { EMAIL, socials } from "@/data/site";
+import { LINKEDIN_URL, socials } from "@/data/site";
 
 // Scroll progress (0–1) at which an element starts to build.
 const at = (s) => ({ "--s": s });
@@ -43,12 +43,14 @@ export default function Contact() {
                 Have a project, internship or idea? I&apos;d love to hear about it. I usually reply within a day or two.
               </p>
               <a
-                href={`mailto:${EMAIL}`}
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="b-fill inline-flex min-h-[60px] items-center gap-3 rounded-full bg-accent px-7 text-lg font-semibold text-on-accent transition-transform duration-200 hover:-translate-y-[3px]"
                 style={at(0.3)}
               >
-                <Icon name="mail" className="h-5 w-5" />
-                {EMAIL}
+                <Icon name="linkedin" className="h-5 w-5" />
+                Message me on LinkedIn
               </a>
             </div>
           </div>

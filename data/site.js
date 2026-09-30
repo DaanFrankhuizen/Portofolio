@@ -1,7 +1,6 @@
 export const GITHUB_URL = "https://github.com/DaanFrankhuizen";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/daan-frankhuizen-9ab238240/";
 export const INSTAGRAM_URL = "https://www.instagram.com/daan.frankhuizen";
-export const EMAIL = "hello@daanfrankhuizen.nl";
 
 export const socials = [
   { name: "GitHub", handle: "@DaanFrankhuizen", href: GITHUB_URL, icon: "github" },
