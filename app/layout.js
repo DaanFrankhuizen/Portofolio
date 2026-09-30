@@ -2,7 +2,6 @@ import { Archivo, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import MotionProvider from "@/components/MotionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,11 +37,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${archivo.variable} min-h-screen`}
       >
-        <MotionProvider>
-          <Header />
-          <main id="top">{children}</main>
-          <Footer />
-        </MotionProvider>
+        <Header />
+        <main id="top">{children}</main>
+        <Footer />
       </body>
     </html>
   );
